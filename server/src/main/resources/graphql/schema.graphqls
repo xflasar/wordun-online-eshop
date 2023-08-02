@@ -1,0 +1,19 @@
+type Product {
+  id: ID!
+  name: String!
+  price: Float!
+  description: String
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  password: String!
+}
+
+type Query {
+  getProductById(id:ID!): Product
+  getAllProducts: [Product]
+  getUserById(id:ID!): User
+}
