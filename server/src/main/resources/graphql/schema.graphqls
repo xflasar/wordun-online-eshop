@@ -1,8 +1,9 @@
 type Product {
   id: ID!
   name: String!
+  description: String!
   price: Float!
-  description: String
+  stockQuantity: Int!
 }
 
 type User {
@@ -12,8 +13,40 @@ type User {
   password: String!
 }
 
+type Category {
+  id: ID!
+  name: String!
+  description: String!
+  parentCategory: Category!
+  products: [Product]
+}
+
+type OrderItem {
+  id: ID!
+  product: Product!
+  quantity: Int!
+  price: Float!
+}
+
+type Order {
+  id: ID!
+  orderDate: String! # Represents LocalDateTime as string
+  totalPrice: Float!
+  status: String!
+  user: User!
+  orderItems: [OrderItem]
+}
+
 type Query {
-  getProductById(id:ID!): Product
   getAllProducts: [Product]
+  getProductById(id:ID!): Product
+  getProductByName(name:String!): Product
+  getProductsByCategoryId(id:ID!): Product
   getUserById(id:ID!): User
+  getAll: [Order]
+  getById(id:ID!): Order
+  getByUserId(userId:ID!): Order
+  getAllCategories: [Category]
+  getCategoryByName(name:String!): Category
+  getCategoryById(id:ID!): Category
 }
